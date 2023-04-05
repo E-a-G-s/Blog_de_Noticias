@@ -1,6 +1,6 @@
 # Entrega Prueba de Certificacion Talento Digital
 
-## Cuenta de Github:
+## Cuenta de Github: https://github.com/E-a-G-s/Blog_de_Noticias
 
 ## Descripcion
 
