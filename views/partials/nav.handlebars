@@ -1,0 +1,88 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark " data-bs-theme="dark">
+  <div class="container-fluid  ">
+    <a class="navbar-brand" href="/home">BLOG DE NOTICIAS</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon "></span>
+    </button>
+    <div class="collapse navbar-collapse text-center container text-center  " id="navbarNav">  
+        <ul class="navbar-nav  ms-auto mb-2">
+            <li class="nav-item ">
+                <a class="nav-link active" aria-current="page" href="/home">Inicio</a>
+            </li>                                               
+            <li class="nav-item ">
+                <a class="nav-link" disabled>-</a>
+            </li>
+             <li class="nav-item ">
+                <a class="nav-link active" aria-current="page" href="/publicaciones">Pubicaciones</a>
+            </li>                                               
+            <li class="nav-item ">
+                <a class="nav-link" disabled>-</a>
+            </li>
+            <li class="nav-item">
+             <a class="nav-link active" aria-current="page" href="/terror">Terror</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"disable>-</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/suspenso">Suspenso</a>
+            </li>
+             </li>
+            <li class="nav-item">
+                <a class="nav-link"disable>-</a>
+            </li>
+            <li class="nav-item">
+
+            <a class="nav-link active bi bi-person-bounding-box " aria-current="page" id="registerUser" href="/registrar"> Registrarse </a>
+            </li>                                             
+            <li class="nav-item">
+            <a class=" nav-link active bi bi-box-arrow-in-right mx-5" id="linkLoginUser" href="/login"> Ingresar</a>
+            </a>
+          </li>
+            <li class="nav-item">
+             <a class=" nav-link active bi bi-pencil-fill mx-5 " id="publicarUser" href="/publicar"> Publicar</a>
+            </a>
+          </li>
+          <li class="nav-item">
+             <a class=" nav-link active bi bi-box-arrow-left mx-5 " id="linkLogoutUser" href=""> Salir</a>
+            </a>
+          </li>
+        </ul>
+    
+    </div>
+    </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+    const linkLogoutUser = document.getElementById("linkLogoutUser");
+    linkLogoutUser.addEventListener("click", (event) =>{
+        event.preventDefault();
+        Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Sesion Cerrada!',
+  showConfirmButton: false,
+  timer: 1500
+}).then(response => location.href = "/home")
+        localStorage.clear();
+          
+    });
+ 
+
+    if(localStorage.getItem("jwt")){
+        linkLoginUser.style.display = "none";
+        registerUser.style.display = "none";
+    }else {
+        linkLogoutUser.style.display = "none";
+        publicarUser.style.display = "none";
+       
+    }
+     
+
+        //location.href= "/publicar?token="+localStorage.getItem("jwt")
+   
+</script>
+
+

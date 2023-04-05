@@ -1,0 +1,91 @@
+
+<section class="container text-center mt-5 text-danger mb-5">
+<h2 class="text-center">Publicacion de:</h2>
+     <form action="" id="addPublicacion">
+   
+<div>
+   
+  <div class="mb-3 ">   
+  <input class="fs-3" id="userName" name="nombreUsuario" style="color:aliceblue; background:none; border:none;" ></input>
+  
+  </div>  
+            <label for="">TItulo</label>
+            <input class="border-danger" type="text" id="addTitulo" name="titulo" required>
+        </div>
+        <div>
+            <div><label for="">contenido</label> </div>
+            <textarea  class=" border-danger "  name="contenido" cols="30" rows="10" id="addContenido" required></textarea>
+        </div>
+    
+        <div>
+            <label for="">seleccione una categoría:</label>
+     <select name="nombreCategoria" id="addCategoria" required>
+            {{#each categorias}}
+            <option value="{{this.nombre}}">{{this.nombre}}</option>
+            {{/each}}
+        </select>
+        </div>
+    
+    <div>
+ Ingresar Imagen: <input type="file" name="imagen" required>
+    </div>
+    <div >
+    
+       <button class="btn btn-dark btn-lg mt-3" type="submit">Enviar</button>
+   
+
+    </div>
+        
+       
+    </form>
+
+</section>
+
+<section class="container">
+
+
+
+</section>
+
+
+
+<script>
+      window.addEventListener("load", recuperar);
+
+
+   function  recuperar() {
+  const userInformation = (localStorage.getItem("Usuario"));
+const user=  document.getElementById("userName").value=userInformation
+ }
+const formulario = document.getElementById('addPublicacion')
+ formulario.addEventListener("submit", (event) => {
+
+              event.preventDefault();
+ console.log(addTitulo.value, addContenido.value, addCategoria.value,userName.value)
+
+ let myHeaders = new Headers();
+        myHeaders.append("authorization", "Bearer ")
+    
+       // console.log(nuevoProducto)
+      
+        fetch("http://localhost:3000/api/publicar", {
+            method: "post",
+            headers:myHeaders,
+            body: new FormData(formulario),
+            redirect: "follow"
+        })
+  .then(response => response.json())
+  .then(response =>  console.log(response))
+     Swal.fire(
+  '¡¡¡ PUBLICACION CREADA !!!',
+  '',
+  'success'
+).then(response => location.href = "/publicaciones")
+  .catch(err => console.error(err));
+       
+        
+    })
+
+
+
+</script>

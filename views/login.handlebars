@@ -1,0 +1,82 @@
+<section class="vh-100">
+  <div class="container py-5  ">
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white border-danger" style="border-radius: 2rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-5 mt-md-4 pb-5">
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+             <p class="text-white-50 mb-5">¡ Por favor, introduce tu usuario y contraseña !</p>
+    <form id="loginUser">
+              <div class="form-outline form-white ">
+                <input type="email" id="emailLoginUser" class="form-control form-control-lg" />
+                <label class="form-label" for="typeEmailX">Email</label>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <input type="password" id="passwordLoginUser" class="form-control form-control-lg" />
+                <label class="form-label" for="typePasswordX">Password</label>
+              </div>
+                 <button class="btn btn-outline-light btn-lg px-5" type="submit">Ingresar</button>
+               </div>
+</form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+
+  const formularioLogin = document.getElementById('loginUser')
+        formularioLogin.addEventListener("submit", (event) => {
+
+              event.preventDefault();
+              const headers = new Headers();
+
+
+
+        headers.append("Content-Type", "application/json");
+
+
+
+
+        let user = {
+            
+ 	    email:emailLoginUser.value,
+      password:passwordLoginUser.value,
+    
+    
+            
+        }
+       // console.log(nuevoProducto)
+      
+        fetch("http://localhost:3000/api/login", {
+            method: "post",
+            headers,
+            body: JSON.stringify(user),
+            redirect: "follow"
+        })
+  .then(response => response.json())
+
+  .then(result => {
+    console.log(result)
+         if(result.code == 200){
+           Swal.fire( {icon: 'success',title: 'Usuario autenticado con éxito'}).then(response => location.href = "/publicar")
+           
+           localStorage.setItem("Usuario",user.email)
+            localStorage.setItem("jwt", result.token)
+                  }else{
+              Swal.fire( {icon: 'error',title: 'Debe proporcionar un usuario válido'}).then(response => location.reload())
+        }
+    })
+    .catch(error => console.log('error', error));
+})
+
+        
+
+</script>

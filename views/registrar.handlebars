@@ -1,0 +1,88 @@
+<section class="vh-100">
+  <div class="container py-5  ">
+    <div class="row d-flex justify-content-center align-items-center h-100 ">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white border-danger" style="border-radius: 2rem;">
+
+
+          <div class="card-body p-5 text-center">
+              <h2 class="fw-bold mb-2 text-uppercase">REGISTRATE</h2>
+  
+         
+        <form id="registrarUsuario">
+            <div class="row mx-auto mt-5">
+              <div class="col-6">
+                <label class="form-label" for="typeEmailX">Nombre</label>
+                <input type="text" id="nombreRegisterUser" class="form-control form-control-lg" placeholder="nombre" required/>
+              </div>
+              <div class="col-6">
+                <label class="form-label" for="typeEmailX">Email</label>
+                <input type="email" id="emailRegisterUser" class="form-control form-control-lg" placeholder="Email" required/>
+              </div>
+            </div>
+            <div class="row mx-auto mt-3">
+              <div class="col-6">
+                <label class="form-label" for="typeEmailX">Password</label>
+                <input  type="password" id="passwordRegisterUser1" class="form-control form-control-lg" placeholder="Pasword" required />
+              </div>
+              <div class="col-6">
+                <label class="form-label" for="typeEmailX">Corrobore Password</label>
+                <input  type="password"id="passwordRegisterUser2" class="form-control form-control-lg" placeholder="Pasword" required/>
+              </div>
+            </div>
+  
+  
+            <div class="mt-5">
+  
+              <button class="btn btn-outline-light btn-lg px-5" >Ingresar</button>
+            </div>
+   
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+ const formulario = document.getElementById('registrarUsuario')
+        formulario.addEventListener("submit", (event) => {
+              event.preventDefault();
+           if(passwordRegisterUser1.value !== passwordRegisterUser2.value){
+   return Swal.fire( {icon: 'warning',title: 'Las Password No son iguales'}).then(response => location.reload())
+        }
+     const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        let nuevoProducto = {
+            
+ 	    nombre:nombreRegisterUser.value,
+      email:emailRegisterUser.value,
+      password:passwordRegisterUser1.value,
+    
+            
+        }
+       // console.log(nuevoProducto)
+      
+        fetch("http://localhost:3000/api/usuario", {
+            method: "post",
+            headers,
+            body: JSON.stringify(nuevoProducto),
+            redirect: "follow"
+        })
+  .then(response => response.json())
+  .then(response =>  (response))
+   Swal.fire(
+  'REGISTRO CREADO!',
+  'Usuario Creado con exito!',
+  'success'
+).then(response => location.href = "/home")
+  .catch(err => console.error(err));
+           formulario.reset();
+        
+        
+    })
+
+</script>
